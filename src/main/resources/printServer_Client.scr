@@ -1,0 +1,14 @@
+module printServer_Client;
+
+type <java> "java.lang.String" from "rt.jar" as msg;
+
+local protocol PrintServer at Client(role Client,role Server) {
+	rec START {
+		choice at Client {
+			send(msg) to Server;
+			continue START;
+		} or {
+			done() to Server;
+		}
+	}
+}
